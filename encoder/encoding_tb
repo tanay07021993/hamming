@@ -1,0 +1,26 @@
+module encoding;
+
+	// Inputs
+	reg [1:8] d;
+
+	// Outputs
+	wire [1:12] e_d;
+
+	// Instantiate the Unit Under Test (UUT)
+	hamming_encoding uut (
+		.d(d), 
+		.e_d(e_d)
+	);
+
+	initial begin
+		// Initialize Inputs
+		d = 0;
+
+		// Wait 100 ns for global reset to finish
+		#10;
+        d=8'b11000100;
+		// Add stimulus here
+
+	end
+      
+endmodule
