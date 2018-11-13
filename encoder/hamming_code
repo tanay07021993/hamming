@@ -1,0 +1,22 @@
+
+module hamming_encoding(input [1:8]d,output [1:12]e_d);
+wire [4:1] p;                     /*hamming code for 8 bit data with 4 parity bits*/
+/*assign p[1]={d[4] ^ d[3] ^ d[2] ^ d[1]};
+assign p[2]=d[7] ^ d[6] ^ d[5] ^ d[1];
+assign p[3]=d[8] ^ d[6] ^ d[5] ^ d[3] ^ d[2];
+assign p[4]=d[8] ^ d[7] ^ d[5] ^ d[4] ^  d[2];
+assign e_d[12:1]= { d[8:5],p[4],d[4:2],p[3],d[1],p[2:1] };*/
+
+xor a1(p[1],d[1],d[2],d[4],d[5],d[7]); /*p1*/
+
+xor a2(p[2],d[1],d[3],d[4],d[6],d[7]); /*p2*/
+
+xor a3(p[3],d[2],d[3],d[4],d[8]);/*p4*/
+
+xor a4(p[4],d[5],d[6],d[7],d[8]); /*p8*/
+
+assign e_d[1:12]= { p[1],p[2],d[1],p[3],d[2:4],p[4],d[5:8] };
+
+
+
+
