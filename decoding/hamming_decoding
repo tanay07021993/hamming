@@ -1,8 +1,8 @@
-module hamming_decoding(input [1:12]d, output [4:1]c,
-output reg [1:12]temp);
+module hamming_decoding(input [1:12]d, output reg [1:12]temp);
 //reg [4:1]temp1;
 //reg deci;
-    
+//reg [1:12] temp;
+wire [4:1]c;   
 xor a1(c[1],d[1],d[3],d[5],d[7],d[9],d[11]); /*c1*/
 
 xor a2(c[2],d[2],d[3],d[6],d[7],d[10],d[11]); /*c2*/
@@ -11,19 +11,17 @@ xor a3(c[3],d[4],d[5],d[6],d[7],d[12]);/*c4*/
 
 xor a4(c[4],d[8],d[9],d[10],d[11],d[12]); /*c8*/
 
-always @ (*)
+		always @ (*)
 begin
-      temp = d;
+assign temp = d;
+
       if (c==0)
       begin 
-      $display("no error");
+       $display ("NO Error" ); 
       end
-      else if (c!=0)
+      else 
       begin 
       $display ("Error is at bit position %d",c); // display error occurence bit
-      temp[c]=temp[c]^1;
-      end
+      temp[c]=temp[c]^1;		
+      end 
 end
-
-
-endmodule
